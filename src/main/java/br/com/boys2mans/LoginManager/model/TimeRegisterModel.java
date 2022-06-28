@@ -10,9 +10,9 @@ public class TimeRegisterModel {
 
     boolean active;
 
-    LocalDateTime registrationDate;
+    LocalDateTime registrationDate = LocalDateTime.now();
 
-    LocalDateTime lastAccessDate;
+    LocalDateTime lastAccessDate = LocalDateTime.now();
 
     LocalDateTime inativationDate;
 

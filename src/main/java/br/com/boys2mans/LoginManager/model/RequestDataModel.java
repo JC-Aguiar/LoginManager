@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -30,5 +31,7 @@ public class RequestDataModel {
 
     @ManyToOne()
     UserModel user;
+
+    LocalDateTime registerDate = LocalDateTime.now();
 
 }

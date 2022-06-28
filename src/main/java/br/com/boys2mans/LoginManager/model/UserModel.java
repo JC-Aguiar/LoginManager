@@ -3,12 +3,14 @@ package br.com.boys2mans.LoginManager.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,25 +19,32 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @Entity(name = "User")
-public class UserModel {
+public class UserModel extends TimeRegisterModel{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
+    @NotBlank(message = "Please enter with your full name")
+    @Length(min = 3)
     String userName;
 
+    @Email
+    @NotBlank(message = "Please enter a valid e-mail")
+    @Column(unique = true)
     String email;
 
+    //TODO: implementar validação mais rigorosa para senhas
+    @NotBlank(message = "Please enter a valid password")
+    @Length(min = 4)
     String password;
-
-    LocalDateTime registrationDate;
-
-    LocalDateTime lastAccessDate;
 
     String token;
 
     LocalDateTime tokenValidationDate;
 
-    List<RequestDataModel> access;
+    @NotNull
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    final List<RequestDataModel> access = new ArrayList<>();
 
 }
+

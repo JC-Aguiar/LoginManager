@@ -3,10 +3,7 @@ package br.com.boys2mans.LoginManager.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -31,4 +28,18 @@ public class RequestDataModel {
 
     String request;
 
+    @ManyToOne()
+    UserModel user;
+
+    @ManyToOne
+    @JoinColumn(name = "user_model_id")
+    private UserModel userModel;
+
+    public UserModel getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
 }

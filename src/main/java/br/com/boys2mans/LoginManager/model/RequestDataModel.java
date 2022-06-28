@@ -31,15 +31,4 @@ public class RequestDataModel {
     @ManyToOne()
     UserModel user;
 
-    @ManyToOne
-    @JoinColumn(name = "user_model_id")
-    private UserModel userModel;
-
-    public UserModel getUserModel() {
-        return userModel;
-    }
-
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
-    }
 }
